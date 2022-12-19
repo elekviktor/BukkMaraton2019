@@ -36,6 +36,28 @@ class Versenyzo {
     private String egyesulet;
     private String ido;
 
+    public String getVersenytav() {
+        return versenytav.getTav();
+    }
+
+    public boolean isNo() {
+        return kategoria.charAt(kategoria.length() - 1) == 'n';
+    }
+
+    public int getOrakSzama() {
+        String oraString = ido.split(":")[0];
+        return Integer.parseInt(oraString);
+    }
+
+    public int getOsszIdoMasodpercben() {
+        String[] idoString = ido.split(":");
+        int ora = Integer.parseInt(idoString[0]);
+        int perc = Integer.parseInt(idoString[1]);
+        int masodperc = Integer.parseInt(idoString[2]);
+
+        return ora * 60 * 60 + perc * 60 + masodperc;
+    }
+
     public String getKategoria() {
         return kategoria;
     }
@@ -69,7 +91,7 @@ class Versenyzo {
 
 class BukkMaraton2019 {
     public static void main(String[] args) {
-        // 3. Feladat
+
         List<Versenyzo> versenyzoList = new ArrayList<>();
         File inputFile = new File("bukkm2019.txt");
         try (Scanner scanner = new Scanner(inputFile)) {
@@ -82,5 +104,7 @@ class BukkMaraton2019 {
             System.err.print("Fájl nem található!");
             return;
         }
+        double szazalekertek = (1 - ((double) versenyzoList.size() / 691)) * 100;
+        System.out.println("4. feladat: A versenytávot nem teljesítők: " + szazalekertek + "%");
     }
 }
