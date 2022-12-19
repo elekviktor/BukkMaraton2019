@@ -91,7 +91,7 @@ class Versenyzo {
 
 class BukkMaraton2019 {
     public static void main(String[] args) {
-
+        // 3. Feladat
         List<Versenyzo> versenyzoList = new ArrayList<>();
         File inputFile = new File("bukkm2019.txt");
         try (Scanner scanner = new Scanner(inputFile)) {
@@ -106,5 +106,13 @@ class BukkMaraton2019 {
         }
         double szazalekertek = (1 - ((double) versenyzoList.size() / 691)) * 100;
         System.out.println("4. feladat: A versenytávot nem teljesítők: " + szazalekertek + "%");
+
+        int noiRovidDarabszam = 0;
+        for (Versenyzo versenyzo : versenyzoList) {
+            if (versenyzo.isNo() && versenyzo.getVersenytav().equals("Rövid")) {
+                noiRovidDarabszam++;
+            }
+        }
+        System.out.println("5. feladat: Női versenyzők száma a rövid távú versenyen: " + noiRovidDarabszam + "fő");
     }
 }
